@@ -1,0 +1,17 @@
+{
+    "Url": "https://999.md/",
+    "Users": [
+        {
+            "email": "borimord@gmail.com",
+            "password": "qw5QW5qw5!",
+            "FeatrueToggle": "True",
+            "nickName": "Panda229"
+        },
+        {
+            "email": "asdasdas2@gmail.com",
+            "password": "qw5QW5QW52",
+            "FeatrueToggle": "False",
+            "nickName": "Panda229"
+        }
+    ]
+}

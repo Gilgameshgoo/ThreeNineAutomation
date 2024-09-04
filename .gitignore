@@ -1,0 +1,11 @@
+TestProject1/AutomationCore/bin/
+TestProject1/.vs/
+TestProject1/AutomationCore/obj/Debug/net8.0/AutomationCore.csproj.AssemblyReference.cache
+TestProject1/AutomationCore/obj/Debug/
+TestProject1/TestProject1/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Json.dll
+TestProject1/TestProject1/bin/Debug/
+TestProject1/TestProject1/bin/QA/
+TestProject1/TestProject1/bin/Release/net8.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll
+TestProject1/TestProject1/bin/Release/
+TestProject1/TestProject1/bin/UAT/
+TestProject1/TestProject1/obj/

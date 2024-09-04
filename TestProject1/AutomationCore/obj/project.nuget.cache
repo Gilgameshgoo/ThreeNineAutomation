@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "tW5MylBlbGM=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\CosaNostra\\source\\repos\\ThreeNineAutomation\\TestProject1\\AutomationCore\\AutomationCore.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\CosaNostra\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\CosaNostra\\.nuget\\packages\\selenium.support\\4.23.0\\selenium.support.4.23.0.nupkg.sha512",
+    "C:\\Users\\CosaNostra\\.nuget\\packages\\selenium.webdriver\\4.23.0\\selenium.webdriver.4.23.0.nupkg.sha512",
+    "C:\\Users\\CosaNostra\\.nuget\\packages\\selenium.webdriver.chromedriver\\127.0.6533.11900\\selenium.webdriver.chromedriver.127.0.6533.11900.nupkg.sha512"
+  ],
+  "logs": []
+}

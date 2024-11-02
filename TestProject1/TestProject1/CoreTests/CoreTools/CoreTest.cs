@@ -1,14 +1,9 @@
 ﻿
 using Microsoft.Extensions.Configuration;
-using ThreeNineTests.CoreTests.ConfigUser;
 using AutomationCore.CoreTools;
-
-
-using System;
-using System.IO;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.Extensions;
+using ThreeNineTests.CoreTests.PomPages;
+using ThreeNineTests.CoreTests.Data.DataMappers;
+using ThreeNineTests.CoreTests.Data.DataGenerator;
 namespace ThreeNineTests.CoreTests.CoreTools
 
 
@@ -19,6 +14,7 @@ namespace ThreeNineTests.CoreTests.CoreTools
         private IConfigurationRoot config;
         private List<UserJsonMap> users;
         private static string solFilesDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+        private static string uploadFilesDirectory = solFilesDirectory + "\\CoreTests\\Data\\Files";
         private string configFilesDirectory = solFilesDirectory  + "\\CoreTests\\ConfigData";
         string env;
        
@@ -34,11 +30,11 @@ namespace ThreeNineTests.CoreTests.CoreTools
             url = config.GetValue<string>("Url") ?? throw new ArgumentNullException(nameof(url), "Url cannot be null.");
             GetUser(true);
         }
-        protected IWebDriver Open999()
+        protected CoreChromeDriver Open999()
         {
-            IWebDriver driver = new ChromeDriver();
+            CoreChromeDriver driver = new CoreChromeDriver();
             driver.Navigate().GoToUrl(url);
-            Wait.UntilTrue(()=> (driver.ExecuteJavaScript<string>("return document.readyState;") == "complete"),TimeSpan.FromSeconds(10));
+            Wait.UntilTrue(() => new StartPage(driver).mainLogo.Displayed,TimeSpan.FromSeconds(10));
 
             return driver;
         }
@@ -47,6 +43,10 @@ namespace ThreeNineTests.CoreTests.CoreTools
             users = config.GetRequiredSection("Users").Get<List<UserJsonMap>>() ?? throw new ArgumentNullException(nameof(users), "Users cannot be null.");
             return users.Where(p=> p.FeatrueToggle == featureTogle).ToList()[0];
        
+        }
+        protected CarsDataGenerator GetCarData()
+        {
+            return new CarsDataGenerator(uploadFilesDirectory);
         }
         private void GetEnv()
         {

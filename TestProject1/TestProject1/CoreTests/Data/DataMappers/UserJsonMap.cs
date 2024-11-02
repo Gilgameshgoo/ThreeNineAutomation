@@ -1,4 +1,4 @@
-﻿namespace ThreeNineTests.CoreTests.ConfigUser
+﻿namespace ThreeNineTests.CoreTests.Data.DataMappers
 {
     public class UserJsonMap
     {

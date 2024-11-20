@@ -1,12 +1,12 @@
-﻿using ThreeNineTests.CoreTests.PomPages;
-using ThreeNineTests.CoreTests.CoreTools;
+﻿using ThreeNineTests.CoreTests.CoreTools;
+using ThreeNineTests.CoreTests.PomPages;
 
 namespace ThreeNineTests.CoreTests.Actions
 {
     public static class CreateApplicationActions
     {
         public static bool OpenMenuForCategory(CoreChromeDriver driver, ApplicationPage applicationPage)
-        {   
+        {
             var messageText = "Hi, I am Josh Foreman" + new Random().Next(1, 1000);
             var receiverName = applicationPage.userLogin.Text.Trim();
             var applicationName = applicationPage.applicationName.Text.Trim();
@@ -17,9 +17,9 @@ namespace ThreeNineTests.CoreTests.Actions
 
             TopBarPanelActions.OpenLastSentMessage(driver, applicationPage.topBarPanel);
 
-            Assert.IsTrue(applicationPage.topBarPanel.lastMessageInChat.Text.Contains(messageText));
-            Assert.IsTrue(applicationPage.topBarPanel.userLoginInChat.Text.Contains(receiverName));
-            Assert.IsTrue(applicationPage.topBarPanel.appNameInChat.Text.Contains(applicationName));
+            Assert.That(applicationPage.topBarPanel.lastMessageInChat.Text.Contains(messageText));
+            Assert.That(applicationPage.topBarPanel.userLoginInChat.Text.Contains(receiverName));
+            Assert.That(applicationPage.topBarPanel.appNameInChat.Text.Contains(applicationName));
 
             return true;
         }
@@ -27,7 +27,7 @@ namespace ThreeNineTests.CoreTests.Actions
         {
             var applicationName = applicationPage.topBarPanel.appNameInChat.Text;
             applicationPage.topBarPanel.appNameInChat.Click();
-        
+
             return driver.GetNumberofWindowsByTitle(applicationName) == 2;
         }
     }

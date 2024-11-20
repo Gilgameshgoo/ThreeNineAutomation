@@ -1,25 +1,25 @@
 ﻿namespace AutomationCore.CoreTools
 {
     public static class Wait
-        {
+    {
         public static bool UntilTrue(Func<bool> condition, TimeSpan timeout, int intervalSeconds = 1)
-            {
-                DateTime endTime = DateTime.Now + timeout;
-                Exception? raisedException = null;
-            
-                while (DateTime.Now < endTime)
-                {
-                    try
-                    {
-                        if (condition())
-                        {
-                            return true;
-                        }
-                    }
-                    catch(Exception ex) { raisedException = ex; }
+        {
+            DateTime endTime = DateTime.Now + timeout;
+            Exception? raisedException = null;
 
-                    Thread.Sleep(intervalSeconds * 1000);
+            while (DateTime.Now < endTime)
+            {
+                try
+                {
+                    if (condition())
+                    {
+                        return true;
+                    }
                 }
+                catch (Exception ex) { raisedException = ex; }
+
+                Thread.Sleep(intervalSeconds * 1000);
+            }
 
             throw new TimeoutException(raisedException != null ? raisedException.Message : "Expression is False");
         }
@@ -55,13 +55,14 @@
                     action();
                     return;
                 }
-                catch  { 
-                     }
+                catch
+                {
+                }
 
                 Thread.Sleep(intervalSeconds * 1000);
             }
 
-            throw new TimeoutException(raisedException!=null ? raisedException.Message : null);
+            throw new TimeoutException(raisedException != null ? raisedException.Message : null);
         }
     }
 }

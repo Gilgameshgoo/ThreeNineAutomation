@@ -24,7 +24,7 @@ namespace ThreeNineTests.CoreTests.Actions
             Wait.Until(() => driver.SwitchTo().Frame(topBarPage.topBarChatIframe), TimeSpan.FromSeconds(20));
             Wait.Until(() => topBarPage.lastSentMessage.Click(), TimeSpan.FromSeconds(50));
 
-            return Wait.UntilTrue(() => topBarPage.messageArea.Displayed, TimeSpan.FromSeconds(10));         
+            return Wait.UntilTrue(() => topBarPage.messageArea.Displayed, TimeSpan.FromSeconds(10));
         }
     }
 }

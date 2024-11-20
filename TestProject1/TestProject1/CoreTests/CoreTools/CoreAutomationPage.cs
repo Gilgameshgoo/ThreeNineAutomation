@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using ThreeNineTests.CoreTests.CoreTools;
 using ThreeNineTests.CoreTests.CoreTools.Elements;
 
@@ -10,55 +9,54 @@ namespace AutomationCore.CoreTools
         protected CoreChromeDriver driver;
 
 
-        public CoreAutomationPage(CoreChromeDriver driver) {
-            this.driver = driver;           
+        public CoreAutomationPage(CoreChromeDriver driver)
+        {
+            this.driver = driver;
         }
-        public IWebElement FindElementInFrameSwitch(By by, IWebElement frame) { 
+        public IWebElement FindElementInFrameSwitch(By by, IWebElement frame)
+        {
             driver.SwitchTo().Frame(frame);
             var element = driver.FindElement(by);
             driver.SwitchTo().DefaultContent();
             return element;
         }
 
-        protected IWebElement FindId(string id )
+        protected WebElement FindId(string id)
         {
-            Assert.IsTrue(!id.StartsWith("/"),"Id element looks like Xpath");
-            return driver.FindElement(By.Id(id));
+            Assert.That(!id.StartsWith("/"), "Id element looks like Xpath");
+            return (WebElement)driver.FindElement(By.Id(id));
         }
-        protected CoreWebelement FindXpath(string xpath)
+        protected WebElement FindXpath(string xpath)
         {
-            Assert.IsTrue(xpath.StartsWith("/"), "Erelevant Xpath");
-            return driver.FindElement(By.XPath(xpath));
+            Assert.That(xpath.StartsWith("/"), "Erelevant Xpath");
+            return (WebElement)driver.FindElement(By.XPath(xpath));
         }
 
-        public void MatchAllSelectElementsByItsName<Z, T>(Z pomPage, T dataClass) where Z: CoreAutomationPage
+        public void MatchAllSelectElementsByItsName<Z, T>(Z pomPage, T dataClass) where Z : CoreAutomationPage
         {
-            foreach (var dataField  in typeof(T).GetFields())
+            foreach (var dataField in typeof(T).GetFields())
             {
                 if (dataField.Name.Contains("Select"))
                 {
                     var dataValueField = (string)dataField.GetValue(dataClass);
-                    var selectField = (CoreSelect) pomPage.GetType().GetProperty(dataField.Name).GetValue(pomPage);
+                    var selectField = (CoreSelect)pomPage.GetType().GetProperty(dataField.Name).GetValue(pomPage);
 
                     dataField.SetValue(dataClass, selectField.SafeSelectByText(dataValueField, 10));
-                    dataValueField = (string)dataField.GetValue(dataClass);
                 }
-
             }
         }
 
-        public void MatchAllШтзгеElementsByItsName<Z, T>(Z pomPage, T dataClass) where Z : CoreAutomationPage
+        public void MatchAllInputElementsByItsName<Z, T>(Z pomPage, T dataClass) where Z : CoreAutomationPage
         {
             foreach (var dataField in typeof(T).GetFields())
             {
                 if (dataField.Name.Contains("Input"))
                 {
                     var dataValueField = (string)dataField.GetValue(dataClass);
-                    var inputField = (CoreWebelement)pomPage.GetType().GetProperty(dataField.Name).GetValue(pomPage);
+                    var inputField = (WebElement)pomPage.GetType().GetProperty(dataField.Name).GetValue(pomPage);
 
-                    inputField.SendKeys(dataValueField);
+                    inputField.SafeSendKeys(dataValueField, 10);
                 }
-
             }
         }
     }

@@ -1,29 +1,16 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using ThreeNineTests.CoreTests.CoreTools.Elements;
+using System.Collections.ObjectModel;
 
 namespace ThreeNineTests.CoreTests.CoreTools
 {
-    public class CoreChromeDriver: ChromeDriver
+    public class CoreChromeDriver : ChromeDriver
     {
         public IWebElement FindElementInFrame(By by, IWebElement frame)
         {
             SwitchTo().Frame(frame);
             var element = FindElement(by);
             return element;
-        }
-
-        public CoreWebelement FindElement(By by)
-        {
-            var element = base.FindElement(by);
-
-            //return new CoreWebelement(this, element.GetAttribute("id"));
-
-            var f =element.GetDomAttribute("ID");
-            var fg = element.GetDomProperty("ID");
-           
-               
-            return (CoreWebelement) element;
         }
 
         public bool SwitchToWindowByTitle(string title)
@@ -36,10 +23,10 @@ namespace ThreeNineTests.CoreTests.CoreTools
                 // Get the title of the current window
                 string currentTitle = Title;
 
-                if(currentTitle == title) {return true;}
-                
+                if (currentTitle == title) { return true; }
+
             }
-            throw new NoSuchWindowException();  
+            throw new NoSuchWindowException();
         }
 
         public int GetNumberofWindowsByTitle(string title)
@@ -57,6 +44,13 @@ namespace ThreeNineTests.CoreTests.CoreTools
 
             }
             return windowsCount;
+        }
+
+        public new ReadOnlyCollection<WebElement> FindElementss(By by)
+        {
+            var list = FindElements(by).Cast<WebElement>().ToList();
+            //var f = .Cast<WebElement>().ToList()
+            return new ReadOnlyCollection<WebElement>(list);
         }
     }
 }

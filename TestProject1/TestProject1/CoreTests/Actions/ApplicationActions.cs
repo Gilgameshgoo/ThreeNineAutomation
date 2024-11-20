@@ -1,12 +1,14 @@
-﻿using ThreeNineTests.CoreTests.PomPages;
+﻿using AutomationCore.CoreTools;
 using ThreeNineTests.CoreTests.CoreTools;
+using ThreeNineTests.CoreTests.CoreTools.Elements;
+using ThreeNineTests.CoreTests.PomPages;
 
 namespace ThreeNineTests.CoreTests.Actions
 {
     public static class ApplicationActions
     {
         public static bool SendMessage(CoreChromeDriver driver, ApplicationPage applicationPage)
-        {   
+        {
             var messageText = "Hi, I am Josh Foreman" + new Random().Next(1, 1000);
             var receiverName = applicationPage.userLogin.Text.Trim();
             var applicationName = applicationPage.applicationName.Text.Trim();
@@ -17,18 +19,33 @@ namespace ThreeNineTests.CoreTests.Actions
 
             TopBarPanelActions.OpenLastSentMessage(driver, applicationPage.topBarPanel);
 
-            Assert.IsTrue(applicationPage.topBarPanel.lastMessageInChat.Text.Contains(messageText));
-            Assert.IsTrue(applicationPage.topBarPanel.userLoginInChat.Text.Contains(receiverName));
-            Assert.IsTrue(applicationPage.topBarPanel.appNameInChat.Text.Contains(applicationName));
+            applicationPage.topBarPanel.lastMessageInChat.AssertContains(messageText);
+            applicationPage.topBarPanel.userLoginInChat.AssertContains(receiverName);
+            applicationPage.topBarPanel.appNameInChat.AssertContains(applicationName);
 
             return true;
         }
-        public static bool OpenAppPageFromChat(CoreChromeDriver driver, ApplicationPage applicationPage)
+        public static bool OpenAdvPageFromChat(CoreChromeDriver driver, ApplicationPage applicationPage)
         {
             var applicationName = applicationPage.topBarPanel.appNameInChat.Text;
             applicationPage.topBarPanel.appNameInChat.Click();
-        
+
             return driver.GetNumberofWindowsByTitle(applicationName) == 2;
+        }
+
+        private static string AddToFavorite(ApplicationPage applicationPage)
+        {
+            applicationPage.addToFavorite.Click();
+            Wait.UntilTrue(() => applicationPage.deleteFromFavorite.Displayed, TimeSpan.FromSeconds(10));
+
+            return applicationPage.applicationName.Text;
+        }
+
+        public static bool AddToFavoriteAndCheckFavoriteList(ApplicationPage applicationPage, CoreChromeDriver driver)
+        {
+            var advName = AddToFavorite(applicationPage);
+
+            return HomePageActions.AdvNamePresentInFirstFavoriteItem(driver, advName);
         }
     }
 }

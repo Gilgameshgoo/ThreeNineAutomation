@@ -6,6 +6,7 @@ namespace ThreeNineTests.CoreTests.CoreTools
 {
     public class CoreChromeDriver : ChromeDriver
     {
+        public CoreChromeDriver(ChromeOptions options) :base(options) { }
         public IWebElement FindElementInFrame(By by, IWebElement frame)
         {
             SwitchTo().Frame(frame);

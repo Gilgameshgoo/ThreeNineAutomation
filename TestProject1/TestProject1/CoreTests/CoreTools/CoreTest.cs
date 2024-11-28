@@ -1,5 +1,6 @@
 ﻿using AutomationCore.CoreTools;
 using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium.Chrome;
 using Serilog;
 using Serilog.Core;
 using ThreeNineTests.CoreTests.Data.DataGenerator;
@@ -16,8 +17,8 @@ namespace ThreeNineTests.CoreTests.CoreTools
         private IConfigurationRoot config;
         private List<UserJsonMap> users;
         private static string solFilesDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-        private static string uploadFilesDirectory = solFilesDirectory + "\\CoreTests\\Data\\Files\\";
-        private string configFilesDirectory = solFilesDirectory + "\\CoreTests\\ConfigData";
+        private static string uploadFilesDirectory = solFilesDirectory + "/CoreTests/Data/Files/";
+        private string configFilesDirectory = solFilesDirectory + "/CoreTests/Config/ConfigData";
         string env;
         protected CarsDataGenerator GeneratedCarData = new CarsDataGenerator(uploadFilesDirectory);
         protected MonitorDataGenerator GeneratedMonitorData = new MonitorDataGenerator(uploadFilesDirectory);
@@ -37,8 +38,11 @@ namespace ThreeNineTests.CoreTests.CoreTools
         }
         protected CoreChromeDriver Open999()
         {
+            var options = new ChromeOptions();
+            options.AddArguments("headless");
+
             logger.Information("Launching 999");
-            driver = new CoreChromeDriver();
+            driver = new CoreChromeDriver(options);
             Wait.Until(() => driver.Navigate().GoToUrl(url), TimeSpan.FromSeconds(190));
             Wait.UntilTrue(() => new StartPage(driver).mainLogo.Displayed, TimeSpan.FromSeconds(10));
 

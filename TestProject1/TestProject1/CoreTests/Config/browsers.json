@@ -1,0 +1,55 @@
+﻿{
+    "“firefox”": {
+        "“default”": "“latest”",
+        "“versions”": {
+            "“latest”": {
+                "“image”": null,
+                "“selenoid/firefox": "latest”",
+                "“port”": "“4444”",
+                "“path”": "“/wd/hub”",
+                "“maxDockerSessions”": 5
+            }
+        }
+    },
+    "“chrome”": {
+        "“default”": "“latest”",
+        "“versions”": {
+            "“latest”": {
+                "“image”": null,
+                "“selenoid/chrome": "latest”",
+                "“port”": "“4444”",
+                "“path”": "“/”",
+                "“maxDockerSessions”": 5,
+                "“vnc”": {
+                    "“enabled”": true
+                },
+                "“log”": {
+                    "“enable”": true
+                }
+            }
+        }
+    },
+    "“MicrosoftEdge”": {
+        "“default”": "“latest”",
+        "“versions”": {
+            "“latest”": {
+                "“image”": null,
+                "“browsers/edge": "latest”",
+                "“port”": "“4444”",
+                "“path”": "“/”",
+                "“maxDockerSessions”": 5
+            }
+        }
+    },
+    "“safari”": {
+        "“default”": "“15.0”",
+        "“versions”": {
+            "“15.0”": {
+                "“image”": null,
+                "“browsers/safari": "15.0”",
+                "“port”": "“4444”",
+                "“path”": "“/”"
+            }
+        }
+    }
+}

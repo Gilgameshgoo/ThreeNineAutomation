@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\TestProject1",
+    "\\TestProject1\\TestProject1",
+    "\\TestProject1\\TestProject1\\CoreTests",
+    "\\TestProject1\\TestProject1\\CoreTests\\CoreTools"
   ],
-  "SelectedNode": "\\TestProject1.sln",
+  "SelectedNode": "\\TestProject1\\TestProject1\\CoreTests\\CoreTools\\CoreTest.cs",
   "PreviewInSolutionExplorer": false
 }

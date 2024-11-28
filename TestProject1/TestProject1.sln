@@ -13,8 +13,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F630688E-45D0-487E-8225-D73F39371E71}.QA|Any CPU.ActiveCfg = QA|Any CPU
 		{F630688E-45D0-487E-8225-D73F39371E71}.QA|Any CPU.Build.0 = QA|Any CPU
-		{F630688E-45D0-487E-8225-D73F39371E71}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
-		{F630688E-45D0-487E-8225-D73F39371E71}.UAT|Any CPU.Build.0 = UAT|Any CPU
+		{F630688E-45D0-487E-8225-D73F39371E71}.UAT|Any CPU.ActiveCfg = QA|Any CPU
+		{F630688E-45D0-487E-8225-D73F39371E71}.UAT|Any CPU.Build.0 = QA|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

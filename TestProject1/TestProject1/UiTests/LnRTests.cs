@@ -5,7 +5,6 @@ using ThreeNineTests.CoreTests.Actions;
 using ThreeNineTests.CoreTests.CoreTools;
 namespace ThreeNineTests.UiTests
 {
-    //[Parallelizable(ParallelScope.Children)]
     public class BaseFunctionalityTests : CoreTest
     {
         [SetUp]

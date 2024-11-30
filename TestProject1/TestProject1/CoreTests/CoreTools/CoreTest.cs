@@ -1,6 +1,8 @@
 ﻿using AutomationCore.CoreTools;
 using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
 using Serilog;
 using Serilog.Core;
 using ThreeNineTests.CoreTests.Data.DataGenerator;
@@ -16,7 +18,7 @@ namespace ThreeNineTests.CoreTests.CoreTools
         protected CoreChromeDriver driver;
         private IConfigurationRoot config;
         private List<UserJsonMap> users;
-        private static string solFilesDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+        private static string solFilesDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName.Replace("\\","/");
         private static string uploadFilesDirectory = solFilesDirectory + "/CoreTests/Data/Files/";
         private string configFilesDirectory = solFilesDirectory + "/CoreTests/Config/ConfigData";
         string env;
@@ -36,14 +38,32 @@ namespace ThreeNineTests.CoreTests.CoreTools
             url = config.GetValue<string>("Url") ?? throw new ArgumentNullException(nameof(url), "Url cannot be null.");
             GetUser(true);
         }
+
         protected CoreChromeDriver Open999()
         {
-            var options = new ChromeOptions();
-            options.AddArguments("headless");
+            ChromeOptions options = new ChromeOptions();
+            options.BrowserVersion = "126.0";
+
+            options.AddAdditionalOption("selenoid:options", new Dictionary<string, object>
+            {   
+                ["name"] = $"Running test: {TestContext.CurrentContext.Test.Name}",
+
+                ["sessionTimeout"] = "3m",
+
+                ["env"] = new List<string>() {
+                "TZ=UTC"},
+         
+                ["labels"] = new Dictionary<string, object>
+                {
+                    ["manual"] = "true"
+                },
+                ["enableVNC"] = true
+            });
+            driver = new CoreChromeDriver(new Uri("http://193.180.209.207:4444/wd/hub"), options);
 
             logger.Information("Launching 999");
-            driver = new CoreChromeDriver(options);
-            Wait.Until(() => driver.Navigate().GoToUrl(url), TimeSpan.FromSeconds(190));
+
+            driver.Navigate().GoToUrl(url);
             Wait.UntilTrue(() => new StartPage(driver).mainLogo.Displayed, TimeSpan.FromSeconds(10));
 
             return driver;

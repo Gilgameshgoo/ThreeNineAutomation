@@ -1,12 +1,21 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.DevTools;
+using OpenQA.Selenium.Remote;
 using System.Collections.ObjectModel;
 
 namespace ThreeNineTests.CoreTests.CoreTools
 {
-    public class CoreChromeDriver : ChromeDriver
+    public class CoreChromeDriver : RemoteWebDriver
     {
         public CoreChromeDriver(ChromeOptions options) :base(options) { }
+        public CoreChromeDriver(Uri uri,ChromeOptions options) : base(uri, options) {
+            var allowsDetection = this as IAllowsFileDetection;
+            if (allowsDetection != null)
+            {
+                allowsDetection.FileDetector = new LocalFileDetector();
+            }
+        }
         public IWebElement FindElementInFrame(By by, IWebElement frame)
         {
             SwitchTo().Frame(frame);

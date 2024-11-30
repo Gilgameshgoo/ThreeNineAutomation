@@ -56,7 +56,8 @@ namespace ThreeNineTests.UiTests
         public void TearDown()
         {
             logger.Information("Test Finished");
-            driver.Quit();
+            if (driver != null) {driver.Quit();}
+                       
         }
     }
 }

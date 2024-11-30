@@ -12,7 +12,7 @@
         public string applicationDescription = "Vand Merceds Vito 2008, Stare Perfecta, Fac Cadou pentru Anul Nou ,Sunati Foaarte Urgent 060591011 - Denis";
         public string? applicationTags;
         public bool noPhoneNumberSwitch = true;
-        public string photo = "Vito.jpeg";
+        public string photo = "Vito.jpg";
         public string carMakeSelect = "Mercedes";
         public string carModelSelect = "Vito";
         public string carRegestrationSelect = "Republica Moldova";

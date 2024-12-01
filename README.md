@@ -46,7 +46,7 @@ http://193.180.209.207:8080/
 
 <h3 align="right">Connect with me:
 
-<a align="right" href="https://linkedin.com/in/https://www.linkedin.com/in/s-dimitrov/" target="blank"><img align="right" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/s-dimitrov/" height="30" width="40" /></a>
+<a align="right" href="https://www.linkedin.com/in/s-dimitrov/" target="blank"><img align="right" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/s-dimitrov/" height="30" width="40" /></a>
 </h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 <h3 align="right">Languages and Tools:</h3>
